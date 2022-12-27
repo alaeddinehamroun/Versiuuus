@@ -8,6 +8,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HeroComponent } from './components/home/hero/hero.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CategoriesComponent } from './components/home/categories/categories.component';
+import { Error404Component } from './components/error404/error404.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
+import { CardComponent } from './components/products-list/card/card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { CategoriesComponent } from './components/home/categories/categories.com
     NavbarComponent,
     HeroComponent,
     FooterComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    Error404Component,
+    ProductsListComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
