@@ -8,17 +8,17 @@
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         <li><a class="justify-between">
-          Categories
-          <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-          </svg>
-        </a>
-        <ul class="p-2">
-          <li><a>Smartphones</a></li>
-          <li><a>Audio</a></li>
-          <li><a>Computers & Accessories</a></li>
-        </ul>
-      </li>
+            Categories
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+            </svg>
+          </a>
+          <ul class="p-2">
+            <li><a>Smartphones</a></li>
+            <li><a>Audio</a></li>
+            <li><a>Computers & Accessories</a></li>
+          </ul>
+        </li>
         <li tabindex="0">
           <a class="justify-between">
             Smartphones
@@ -66,14 +66,24 @@
     </ul>
   </div>
   <div class="navbar-end">
-    <input type="checkbox" class="toggle" checked  data-toggle-theme="dark,light" data-act-class="ACTIVECLASS"/>
+    <input type="checkbox" class="toggle" checked data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" />
 
-    <button class="btn btn-ghost btn-circle">
+    <!-- The button to open modal -->
+    <label for="my-modal-3" class="btn btn-ghost btn-circle">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
       </svg>
-    </button>
+    </label>
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box relative">
+        <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <app-login></app-login>
+      </div>
+    </div>
+
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle">
         <div class="indicator">

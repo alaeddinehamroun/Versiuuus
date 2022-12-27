@@ -12,6 +12,8 @@ import { Error404Component } from './components/error404/error404.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { CardComponent } from './components/products-list/card/card.component';
 import { ComparisonResultComponent } from './components/comparison-result/comparison-result.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ComparisonResultComponent } from './components/comparison-result/compar
     Error404Component,
     ProductsListComponent,
     CardComponent,
-    ComparisonResultComponent
+    ComparisonResultComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
