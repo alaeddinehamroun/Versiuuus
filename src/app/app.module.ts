@@ -11,6 +11,7 @@ import { CategoriesComponent } from './components/home/categories/categories.com
 import { Error404Component } from './components/error404/error404.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { CardComponent } from './components/products-list/card/card.component';
+import { ComparisonResultComponent } from './components/comparison-result/comparison-result.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CardComponent } from './components/products-list/card/card.component';
     CategoriesComponent,
     Error404Component,
     ProductsListComponent,
-    CardComponent
+    CardComponent,
+    ComparisonResultComponent
   ],
   imports: [
     BrowserModule,
