@@ -1,0 +1,36 @@
+<div class="hero" style="background-image: url(https://placeimg.com/1000/800/arch);">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-7xl font-bold text-neutral-content">Compare everything in Tech</h1>
+      <p class="mb-5 text-neutral-content">Smartphones, Pcs, Monitors, Earbuds, and much more</p>
+
+      <div class="mx-8">
+        <div class="input-group mb-2" *ngFor="let product of products">
+          <input type="text" autocomplete="off" value="{{product}}" placeholder="Type here to compare up to 7 items"
+            class="input input-bordered grow" />
+          <button class="btn btn-primary btn-circle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+              </path>
+            </svg>
+          </button>
+        </div>
+        <div class="form-control">
+          <div class="input-group">
+            <input #newProduct (keyup.enter)="addProduct(newProduct.value)"
+              (blur)="addProduct(newProduct.value); newProduct.value=''" type="text"
+              placeholder="Type here to compare up to 7 items" class="input input-bordered" />
+            <button type="button" class="btn btn-primary">
+              Compare
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
