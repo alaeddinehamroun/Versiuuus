@@ -15,7 +15,7 @@ import { AuthModule } from '../auth/auth.module';
   ],
   imports: [
     AuthModule,
-    CommonModule
+    CommonModule,
   ],
   exports: [
     FooterComponent,

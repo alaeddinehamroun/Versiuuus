@@ -4,6 +4,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ComparisonResultComponent } from './comparison-result/comparison-result.component';
 import { SharedModule } from '../shared/shared.module';
 import { CardComponent } from './card/card.component';
+import { ProductRoutingModule } from './product-routing.module';
 
 
 
@@ -15,7 +16,8 @@ import { CardComponent } from './card/card.component';
   ],
   imports: [
     SharedModule,
-    CommonModule
+    CommonModule,
+    ProductRoutingModule
   ]
 })
 export class ProductModule { }
