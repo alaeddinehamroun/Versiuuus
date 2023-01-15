@@ -3,38 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { HeroComponent } from './components/home/hero/hero.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { CategoriesComponent } from './components/home/categories/categories.component';
-import { Error404Component } from './components/error404/error404.component';
-import { ProductsListComponent } from './components/products-list/products-list.component';
-import { CardComponent } from './components/products-list/card/card.component';
-import { ComparisonResultComponent } from './components/comparison-result/comparison-result.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { AuthModule } from './auth/auth.module';
+import { HomeModule } from './home/home.module';
+import { ProductModule } from './product/product.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    HeroComponent,
-    FooterComponent,
-    CategoriesComponent,
-    Error404Component,
-    ProductsListComponent,
-    CardComponent,
-    ComparisonResultComponent,
-    LoginComponent,
-    SignupComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  imports: [
+    ProductModule,
+    SharedModule,
+    HomeModule,
+    AuthModule,
+    BrowserModule,
+    AppRoutingModule,
+  ]
 })
 export class AppModule { }
