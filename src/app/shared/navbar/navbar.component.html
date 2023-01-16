@@ -67,24 +67,24 @@
   </div>
   <div class="navbar-end">
     <input type="checkbox" class="toggle" checked data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" />
-
-    <!-- The button to open modal -->
-    <label for="my-modal-3" class="btn btn-ghost btn-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-      </svg>
-    </label>
-    <!-- Put this part before </body> tag -->
-    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box relative">
-        <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <auth-login></auth-login>
+    <div *ngIf="!this.authService.isLoggedIn()">
+      <!-- The button to open modal -->
+      <label for="my-modal-3" class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+        </svg>
+      </label>
+      <!-- Put this part before </body> tag -->
+      <input type="checkbox" id="my-modal-3" class="modal-toggle" [(ngModel)]="isShown" />
+      <div class="modal">
+        <div class="modal-box relative">
+          <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <auth-login (valueChange)="hideLogin($event)"></auth-login>
+        </div>
       </div>
     </div>
-
-    <div class="dropdown dropdown-end">
+    <div class="dropdown dropdown-end" *ngIf="this.authService.isLoggedIn()">
       <label tabindex="0" class="btn btn-ghost btn-circle">
         <div class="indicator">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,7 +104,7 @@
         </div>
       </div>
     </div>
-    <div class="dropdown dropdown-end">
+    <div class="dropdown dropdown-end" *ngIf="this.authService.isLoggedIn()">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img src="https://placeimg.com/80/80/people" />
@@ -118,9 +118,10 @@
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><a (click)="this.authService.logout()">Logout</a></li>
       </ul>
     </div>
-
   </div>
+
+
 </div>
