@@ -5,7 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { CartModule } from './cart/cart.module';
 import { HomeModule } from './home/home.module';
+import { TruncatePipe } from './pipes/truncate.pipe';
 import { ProductModule } from './product/product.module';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
@@ -21,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   bootstrap: [AppComponent],
   imports: [
+    CartModule,
     ProductModule,
     SharedModule,
     HomeModule,
@@ -28,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
-  ]
+  ],
+
 })
 export class AppModule { }

@@ -269,31 +269,19 @@
 
       <div class="lg:col-span-3">
         <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <li >
-            <product-card></product-card>
+          <li *ngFor="let product of products | paginate: { itemsPerPage: 12, currentPage: pageNumber}">
+            <product-card [product]="product" [category]="category"></product-card>
           </li>
-          <li >
-            <product-card></product-card>
-          </li>
-          <li >
-            <product-card></product-card>
-          </li>
-          <li >
-            <product-card></product-card>
-          </li>
-          <li >
-            <product-card></product-card>
-          </li>
-          <li >
-            <product-card></product-card>
-          </li>
-          <li >
-            <product-card></product-card>
-          </li>
+
 
 
         </ul>
         <ol class="flex justify-center gap-1 mt-8 text-xs font-medium">
+          <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+
+        </ol>
+        <ol class="flex justify-center gap-1 mt-8 text-xs font-medium">
+
           <li>
             <a href="#" class="inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded">
               <span class="sr-only">Prev Page</span>

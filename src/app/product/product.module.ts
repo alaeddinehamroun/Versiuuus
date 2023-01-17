@@ -5,6 +5,9 @@ import { ComparisonResultComponent } from './comparison-result/comparison-result
 import { SharedModule } from '../shared/shared.module';
 import { CardComponent } from './card/card.component';
 import { ProductRoutingModule } from './product-routing.module';
+import { TruncatePipe } from '../pipes/truncate.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 
@@ -12,12 +15,16 @@ import { ProductRoutingModule } from './product-routing.module';
   declarations: [
     ProductsListComponent,
     ComparisonResultComponent,
-    CardComponent
+    CardComponent,
+    ProductDetailsComponent,
+    
   ],
   imports: [
     SharedModule,
     CommonModule,
-    ProductRoutingModule
-  ]
+    ProductRoutingModule,
+    NgxPaginationModule
+  ],
+
 })
 export class ProductModule { }

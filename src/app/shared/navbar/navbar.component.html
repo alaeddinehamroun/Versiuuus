@@ -31,11 +31,12 @@
             <li><a>Submenu 2</a></li>
           </ul>
         </li>
-        <li><a>Pcs</a></li>
+        <li><a [routerLink]="['products/pcs']">Pcs</a></li>
       </ul>
     </div>
-    <a class="btn btn-ghost normal-case text-xl">VERSIUUUS</a>
+    <a class="btn btn-ghost normal-case text-xl" [routerLink]="['']">VERSIUUUS</a>
   </div>
+
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
       <li><a class="justify-between">
@@ -44,7 +45,7 @@
             <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
           </svg>
         </a>
-        <ul class="p-2">
+        <ul class="p-2 bg-base-300 z-50">
           <li><a>Smartphones</a></li>
           <li><a>Audio</a></li>
           <li><a>Computers & Accessories</a></li>
@@ -57,16 +58,16 @@
             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
           </svg>
         </a>
-        <ul class="p-2">
+        <ul class="p-2 bg-base-300 z-50">
           <li><a>Submenu 1</a></li>
           <li><a>Submenu 2</a></li>
         </ul>
       </li>
-      <li><a>Pcs</a></li>
+      <li><a [routerLink]="['/products/pcs']">Pcs</a></li>
     </ul>
   </div>
   <div class="navbar-end">
-    <input type="checkbox" class="toggle" checked data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" />
+    <input type="checkbox" class="toggle mr-2" checked data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" />
     <div *ngIf="!this.authService.isLoggedIn()">
       <!-- The button to open modal -->
       <label for="my-modal-3" class="btn btn-ghost btn-circle">
@@ -84,22 +85,53 @@
         </div>
       </div>
     </div>
-    <div class="dropdown dropdown-end" *ngIf="this.authService.isLoggedIn()">
+    <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle">
         <div class="indicator">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
-          <span class="badge badge-sm indicator-item">8</span>
+          <span class="badge badge-sm indicator-item"> {{this.numberOfWishes}}</span>
         </div>
       </label>
-      <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
+      <div tabindex="0" class="mt-3 card card-compact dropdown-content w-150 bg-base-100 shadow">
         <div class="card-body">
-          <span class="font-bold text-lg">8 Items</span>
-          <span class="text-info">Subtotal: $999</span>
+          <span class="font-bold text-lg">{{this.numberOfWishes}} Items</span>
+          <div class="overflow-x-auto">
+            <table class="table w-full">
+              <!-- head -->
+              <thead>
+
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr *ngFor="let item of cartList; let i = index">
+                  <th>{{i + 1}}</th>
+                  <td>
+                    <a (click)="viewProduct(item.category, item.id)" class="cursor-pointer">
+                      {{item.name | truncate:20}}
+                    </a>
+                  </td>
+                  <td>
+                    <a class="cursor-pointer" (click)="this.cartService.RemoveProductFromCart(item.id)">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd"
+                          d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </a>
+
+
+
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
           <div class="card-actions">
-            <button class="btn btn-primary btn-block">View cart</button>
+            <button [routerLink]="['/cartlist']" class="btn btn-primary btn-block">View cart</button>
           </div>
         </div>
       </div>
