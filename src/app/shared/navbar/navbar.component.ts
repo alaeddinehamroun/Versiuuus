@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
     this.cartService.cart$.subscribe((data: Cart[]) => {
       this.numberOfWishes = data.length
       this.cartList = data
-      console.log(this.cartList)
     })
   }
 

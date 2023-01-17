@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import { HomeRoutingModule } from './home-routing.module';
     CategoriesComponent
   ],
   imports: [
+    FormsModule,
     SharedModule,
     CommonModule,
     HomeRoutingModule

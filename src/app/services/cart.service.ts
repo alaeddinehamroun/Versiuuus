@@ -20,10 +20,8 @@ export class CartService {
 
         let info: Cart[]
         let data = localStorage.getItem('cart');
-        console.log(data)
         if (data !== null) {
             info = JSON.parse(data)
-            console.log(info)
             this.cart = info
         }
         else {

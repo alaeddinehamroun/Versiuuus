@@ -19,4 +19,8 @@ export class ProductService {
   getProductById(category: string, id: string): Observable<Product> {
     return this.http.get<Product>(this.SERVER_URL+`products/${category}/${id}`)
   }
+  searchProduct(search: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.SERVER_URL+`products?search=${search}`)
+
+  }
 }
