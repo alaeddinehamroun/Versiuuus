@@ -12,11 +12,12 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent {
 
+  show: boolean = true;
   user: LoginForm = {
     email: '',
     password: ''
   }
-  invalidCredentials: boolean = false
+  errorMessage!: string;
   loggedIn: boolean = false
   @Output() valueChange = new EventEmitter()
   constructor(
@@ -25,20 +26,22 @@ export class LoginComponent {
     private location: Location) { }
 
   onSubmit() {
-    this.invalidCredentials = false
-    this.authService.login(this.user.email, this.user.password).subscribe(
-      () => {
-        console.log("user is logged in");
-        this.loggedIn = true
-        this.valueChange.emit(
-          this.loggedIn
-        )
 
-      }, (err: HttpErrorResponse) => {
-        if (err.status === 401) {
-          this.invalidCredentials = true
+    this.authService.login(this.user.email, this.user.password).subscribe({
+      next: (v) => {
+        this.loggedIn = true
+        this.valueChange.emit(this.user.email)
+      },
+      error: (e) => {
+        if (e.status === 401) {
+          this.errorMessage = "Invalid credentials"
         }
+
+      },
+      complete: () => {
+
       }
-    )
+    })
   }
+
 }

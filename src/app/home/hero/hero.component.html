@@ -27,7 +27,7 @@
             <!-- <ul>
               <li *ngFor="let suggestion of suggestions" (click)="addProduct(suggestion);search()">{{ suggestion.name | truncate: 10}}</li>
             </ul> -->
-            <button type="button" class="btn btn-primary" [routerLink]="['/comparison']">
+            <button (click)="compare()" type="button" class="btn btn-primary">
               Compare
             </button>
           </div>

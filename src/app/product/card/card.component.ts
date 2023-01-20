@@ -9,9 +9,10 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CardComponent implements OnChanges, OnInit {
 
+
   @Input() product?: Product;
   @Input() category?: string;
-  constructor( public cartService: CartService) {
+  constructor(public cartService: CartService) {
     //console.log(this.product)
 
   }
@@ -20,6 +21,7 @@ export class CardComponent implements OnChanges, OnInit {
   }
   ngOnInit(): void {
     //console.log(this.product)
+    console.log(this.product?.minPrice)
   }
   onClick() {
     if (this.cartService.userHasLiked(this.product?._id!))
@@ -27,7 +29,6 @@ export class CardComponent implements OnChanges, OnInit {
     else
       this.cartService.AddProductToCart(this.product?._id!, this.product?.name!, this.category!)
   }
-
 
 
 }

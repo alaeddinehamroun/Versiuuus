@@ -15,7 +15,7 @@ export class SignupComponent {
     email: '',
     password: ''
   }
-  invalidCredentials: boolean = false
+  errorMessage!: string;
   loggedIn: boolean = false
   constructor(
     private authService: AuthService,
@@ -23,7 +23,6 @@ export class SignupComponent {
   ) { }
 
   onSubmit() {
-    this.invalidCredentials = false
     this.authService.register(this.user.email, this.user.password).subscribe(
       {
         next: (v) => {
@@ -32,7 +31,7 @@ export class SignupComponent {
         },
         error: (e) => {
           if (e.status === 400) {
-            this.invalidCredentials = true
+            this.errorMessage = 'User alredy exists'
           }
         },
         complete: () => {

@@ -7,6 +7,10 @@ import { AuthModule } from '../auth/auth.module';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TruncatePipe } from '../pipes/truncate.pipe';
+import { SortPipe } from '../pipes/sort.pipe';
+import { DtPipe } from '../pipes/dt.pipe';
+import { NamePipe } from '../pipes/name.pipe';
+import { PriceFilterPipe } from '../pipes/price-filter.pipe';
 
 
 
@@ -15,7 +19,11 @@ import { TruncatePipe } from '../pipes/truncate.pipe';
     FooterComponent,
     NavbarComponent,
     Error404Component,
-    TruncatePipe
+    TruncatePipe,
+    SortPipe,
+    DtPipe,
+    NamePipe,
+    PriceFilterPipe
   ],
   imports: [
     AuthModule,
@@ -26,7 +34,11 @@ import { TruncatePipe } from '../pipes/truncate.pipe';
     FooterComponent,
     NavbarComponent,
     Error404Component,
-    TruncatePipe
+    TruncatePipe,
+    DtPipe,
+    SortPipe,
+    NamePipe,
+    PriceFilterPipe
   ],
 
 })

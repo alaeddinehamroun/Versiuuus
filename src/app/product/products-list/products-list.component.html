@@ -1,13 +1,14 @@
-<shared-navbar></shared-navbar>
+<progress *ngIf="isLoading" class="flex flex-row progress w-full"></progress>
 
 
-<section>
+
+<section *ngIf="!isLoading">
   <div class="max-w-7xl	px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
     <header>
       <div class="text-sm breadcrumbs">
         <ul>
           <li>
-            <a>
+            <a [routerLink]="['']">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 class="w-4 h-4 mr-2 stroke-current">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -17,13 +18,13 @@
             </a>
           </li>
           <li>
-            <a>
+            <a [routerLink]="['/products/', category]">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 class="w-4 h-4 mr-2 stroke-current">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
               </svg>
-              Smartphones
+              {{category}}
             </a>
           </li>
         </ul>
@@ -34,17 +35,18 @@
       <div class="dropdown dropdown-end lg:hidden">
         <ul class="menu menu-horizontal px-1">
           <li tabindex="0">
-            <a>
+            <!-- <a>
               Filters
               <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                 <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
               </svg>
             </a>
+             -->
             <ul class="p-2 bg-base-100">
-              <li><a>Title, DESC</a></li>
-              <li><a>Title, ASC</a></li>
-              <li><a>Price, DESC</a></li>
-              <li><a>Price, ASC</a></li>
+              <li><a (click)="changeSortParams('name', 'desc')">Name, DESC</a></li>
+              <li><a (click)="changeSortParams('name', 'asc')">Name, ASC</a></li>
+              <li><a (click)="changeSortParams('minPrice', 'desc')">Price, DESC</a></li>
+              <li><a (click)="changeSortParams('minPrice', 'asc')">Price, ASC</a></li>
             </ul>
           </li>
         </ul>
@@ -60,10 +62,10 @@
               </svg>
             </a>
             <ul class="p-2 bg-base-100 z-50">
-              <li><a>Title, DESC</a></li>
-              <li><a>Title, ASC</a></li>
-              <li><a>Price, DESC</a></li>
-              <li><a>Price, ASC</a></li>
+              <li><a (click)="changeSortParams('name', 'desc')">Name, DESC</a></li>
+              <li><a (click)="changeSortParams('name', 'asc')">Name, ASC</a></li>
+              <li><a (click)="changeSortParams('minPrice', 'desc')">Price, DESC</a></li>
+              <li><a (click)="changeSortParams('minPrice', 'asc')">Price, ASC</a></li>
             </ul>
           </li>
         </ul>
@@ -76,10 +78,10 @@
       <!--Filters-->
       <div class="hidden space-y-4 lg:block">
         <div>
-          <p class="block text-lg font-medium text-gray-700">Filters</p>
+          <p class="block text-lg font-medium">Filters</p>
 
           <div class="mt-1 space-y-2">
-            <details class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
+            <!-- <details class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
               <summary class="flex items-center justify-between gap-2 p-4 text-gray-900 transition cursor-pointer">
                 <span class="text-sm font-medium"> Availability </span>
 
@@ -132,9 +134,10 @@
                   </li>
                 </ul>
               </div>
-            </details>
+            </details> -->
 
-            <details class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
+            <details
+              class="overflow-hidden rounded border bg-white border-gray-300 [&_summary::-webkit-details-marker]:hidden">
               <summary class="flex items-center justify-between gap-2 p-4 text-gray-900 transition cursor-pointer">
                 <span class="text-sm font-medium"> Price </span>
 
@@ -146,8 +149,8 @@
                 </span>
               </summary>
 
-              <div class="bg-white border-t border-gray-200">
-                <header class="flex items-center justify-between p-4">
+              <div class="bg-white border-gray-200">
+                <!-- <header class="flex items-center justify-between p-4">
                   <span class="text-sm text-gray-700">
                     The highest price is $600
                   </span>
@@ -155,29 +158,30 @@
                   <button type="button" class="text-sm text-gray-900 underline underline-offset-4">
                     Reset
                   </button>
-                </header>
-
+                </header> -->
                 <div class="p-4 border-t border-gray-200">
-                  <div class="flex justify-between gap-4">
-                    <label for="FilterPriceFrom" class="flex items-center gap-2">
+                  <div class="flex justify-between gap-1">
+                    <label for="FilterPriceFrom" class="flex items-center gap-1">
                       <span class="text-sm text-gray-600">$</span>
 
-                      <input type="number" id="FilterPriceFrom" placeholder="From"
+                      <input [(ngModel)]="minPrice" type="number" id="FilterPriceFrom" min="0" placeholder="From"
                         class="w-full border-gray-200 rounded-md shadow-sm sm:text-sm" />
                     </label>
 
-                    <label for="FilterPriceTo" class="flex items-center gap-2">
+                    <label for="FilterPriceTo" class="flex items-center gap-1">
                       <span class="text-sm text-gray-600">$</span>
 
-                      <input type="number" id="FilterPriceTo" placeholder="To"
-                        class="w-full border-gray-200 rounded-md shadow-sm sm:text-sm" />
+                      <input [(ngModel)]="maxPrice" [value]="minPrice" type="number" id="FilterPriceTo" [min]="minPrice"
+                        placeholder="To" class="w-full border-gray-200 rounded-md shadow-sm sm:text-sm" />
                     </label>
+                    <button class="btn btn-xs btn-accent" (click)="filterProducts()">Filter</button>
+                    <button class="btn btn-xs btn-ghost" (click)="resetProducts()">Reset</button>
                   </div>
                 </div>
               </div>
             </details>
 
-            <details class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
+            <!-- <details class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
               <summary class="flex items-center justify-between gap-2 p-4 text-gray-900 transition cursor-pointer">
                 <span class="text-sm font-medium"> Colors </span>
 
@@ -260,7 +264,7 @@
                   </li>
                 </ul>
               </div>
-            </details>
+            </details> -->
           </div>
         </div>
       </div>
@@ -268,8 +272,20 @@
       <!--List of products-->
 
       <div class="lg:col-span-3">
-        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <li *ngFor="let product of products | paginate: { itemsPerPage: 12, currentPage: pageNumber}">
+        <ul *ngIf="!isFilterByPrice" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <li
+            *ngFor="let product of products | sort: order: attribute | paginate: { itemsPerPage: 12, currentPage: pageNumber }">
+
+            <product-card [product]="product" [category]="category"></product-card>
+          </li>
+
+
+
+        </ul>
+        <ul *ngIf="isFilterByPrice" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <li
+            *ngFor="let product of products | sort: order: attribute |  priceFilter: minPrice : maxPrice| paginate: { itemsPerPage: 12, currentPage: pageNumber } ">
+
             <product-card [product]="product" [category]="category"></product-card>
           </li>
 
@@ -280,7 +296,7 @@
           <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
 
         </ol>
-        <ol class="flex justify-center gap-1 mt-8 text-xs font-medium">
+        <!-- <ol class="flex justify-center gap-1 mt-8 text-xs font-medium">
 
           <li>
             <a href="#" class="inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded">
@@ -327,7 +343,7 @@
               </svg>
             </a>
           </li>
-        </ol>
+        </ol> -->
       </div>
     </div>
   </div>

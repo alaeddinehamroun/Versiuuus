@@ -11,10 +11,17 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./products-list.component.css']
 })
 export class ProductsListComponent implements OnInit, AfterViewInit {
+
+
   category: string = '';
   products: Product[] = [];
   pageNumber: number = 1;
-
+  attribute: string = 'minPrice';
+  order: string = 'asc';
+  isLoading: boolean = false;
+  minPrice!: number;
+  maxPrice!: number;
+  isFilterByPrice: boolean = false
   constructor(private router: Router,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -24,6 +31,9 @@ export class ProductsListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    this.isLoading = true;
+
     this.activatedRoute.paramMap.pipe(
       map((param: ParamMap) => {
         return param.get("category");
@@ -39,16 +49,65 @@ export class ProductsListComponent implements OnInit, AfterViewInit {
       this.productService.getProductsByCategory(this.category).subscribe({
         next: response => {
           this.products = response;
-          console.log(this.products)
+          this.products.forEach(product => {
+            product.minPrice = this.getMinPrice(product.price_mytek, product.price_tunisianet)
+            // console.log(Number(product.minPrice))
+          })
         },
         error: err =>
           console.log(err),
 
         complete: () => {
+          this.isLoading = false;
           console.info('complete')
+
+          // this.products.forEach(p => {
+          //   if (p.price_mytek){
+          //     let price1 = p.price_mytek.replace(/\s/g, "").match(/\d+\,\d+/)
+          //     console.log(price1![0])
+          //   }
+          //   if (p.price_tunisianet) {
+          //     let price2 = p.price_tunisianet.replace(/\s/g, "").match(/\d+\,\d+/)
+          //     console.log(price2![0])
+          //   }
+
+
+
+          // });
         }
       });
 
     })
+  }
+  changeSortParams(attribute: string, order: string) {
+    this.attribute = attribute;
+    this.order = order;
+  }
+  public getMinPrice(price1: string, price2: string): string {
+    if (!price1) {
+      return price2
+
+    }
+    if (!price2) {
+      return price1
+
+    }
+    if (Number(price1) > Number(price2)) {
+      return price2
+    }
+    else
+      return price1
+
+  }
+
+
+  filterProducts() {
+
+    // console.log(this.minPrice)
+    // console.log(this.maxPrice)
+    this.isFilterByPrice = true;
+  }
+  resetProducts(){
+    this.isFilterByPrice = false;
   }
 }

@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  email!: string;
   isShown = false;
   numberOfWishes: number = 0;
   cartList: Cart[] = []
@@ -24,7 +25,10 @@ export class NavbarComponent implements OnInit {
   }
 
   hideLogin(value: string) {
+    if (value)
+      this.email = value
     if (value && this.isShown) {
+
       this.isShown = !this.isShown
     }
   }

@@ -1,26 +1,25 @@
-<shared-navbar></shared-navbar>
-<button class="btn btn-primary" (click)='onBack()'>
+<!-- <button class="btn btn-primary" (click)='onBack()'>
   <i class="fa fa-chevron-left"></i>Back
-</button>
+</button> -->
 <section>
   <div class="relative max-w-screen-xl px-4 py-8 mx-auto">
     <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
       <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
-        <img [alt]="product.reference"
-        [src]="product.image"
-          class="object-cover w-full aspect-square rounded-xl" />
+        <img [alt]="product.reference" [src]="product.image" class="object-cover w-full aspect-square rounded-xl" />
       </div>
 
       <div class="sticky top-0">
+
         <strong
           class="rounded-full border border-blue-600 bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-blue-600">
-          {{product.availability_mytek}} - {{product.availability_tunisianet}}
+
+          {{availability()}}
         </strong>
 
         <div class="flex justify-between mt-8">
           <div class="max-w-[35ch]">
             <h1 class="text-2xl font-bold">
-               {{product.name}}
+              {{product.name}}
             </h1>
 
             <p class="mt-0.5 text-sm">{{product.reference}}</p>
@@ -58,7 +57,7 @@
             </div>
           </div>
 
-          <p class="text-lg font-bold">{{product.price_mytek}} - {{product.price_tunisianet}}</p>
+          <p class="text-lg font-bold">Best Price: {{getMinPrice()}} DT</p>
         </div>
 
         <details class="group relative mt-4 [&_summary::-webkit-details-marker]:hidden">
@@ -66,7 +65,7 @@
             <div>
               <div class="prose max-w-none group-open:hidden">
                 <p>
-                 {{product.description}}
+                  {{product.description}}
                 </p>
               </div>
             </div>
@@ -76,50 +75,106 @@
         <form class="mt-8">
           <fieldset>
             <legend class="mb-1 text-sm font-medium">Prices</legend>
+            <div class="overflow-x-auto w-full">
+              <table class="table w-full ">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>Website</th>
+                    <th>Price (DT)</th>
+                    <th>Visit website</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- row 1 -->
+                  <tr>
 
-            <div class="flow-root">
-              <div class="-m-0.5 flex flex-wrap">
-                <label for="color_tt" class="cursor-pointer p-0.5">
-                  <input type="radio" name="color" id="color_tt" class="sr-only peer" />
+                    <td>
+                      <div class="flex items-center space-x-3">
+                        <div class="avatar">
+                          <div class="mask mask-squircle w-12 h-12">
+                            <img src="../../../assets/tunisianet.png" alt="mytek logo" />
+                          </div>
+                        </div>
+                        <div>
+                          <div class="font-bold">Tunisianet <strong
+                              [ngClass]="product.availability_tunisianet === 'En stock' ?  'border-blue-600 text-blue-600':  'text-red-600 border-red-700'"
+                              class="rounded-full border bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide">
 
-                  <span
-                    class="inline-block px-3 py-1 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                    Texas Tea
-                  </span>
-                </label>
+                              {{product.availability_tunisianet}}
+                            </strong></div>
+                          <div class="text-sm opacity-50">https://www.tunisianet.com.tn</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      {{product.price_tunisianet=== undefined ? 'Not available': product.price_tunisianet}}
+                    </td>
+                    <th>
+                      <a class="btn btn-ghost gap-2" target="_blank" href="{{product.link_tunisianet}}">Link <svg
+                          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </a>
+                    </th>
+                  </tr>
+                  <!-- row 2 -->
+                  <tr>
 
-                <label for="color_fr" class="cursor-pointer p-0.5">
-                  <input type="radio" name="color" id="color_fr" class="sr-only peer" />
+                    <td>
+                      <div class="flex items-center space-x-3">
+                        <div class="avatar">
+                          <div class="mask mask-squircle w-12 h-12">
+                            <img src="../../../assets/mytek.png" alt="mytek logo" />
+                          </div>
+                        </div>
+                        <div>
+                          <div *ngIf="product.availability_mytek" class="font-bold">Mytek <strong
+                              [ngClass]="product.availability_mytek==='En stock' ?  'border-blue-600 text-blue-600':  'text-red-600 border-red-700'"
+                              class="rounded-full border bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide">
 
-                  <span
-                    class="inline-block px-3 py-1 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                    Fiesta Red
-                  </span>
-                </label>
+                              {{product.availability_mytek}}
+                            </strong></div>
+                          <div class="text-sm opacity-50">https://www.mytek.tn</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      {{product.price_mytek===undefined ? 'Not available': product.price_mytek}}
+                    </td>
+                    <th>
+                      <a *ngIf="product.price_mytek !== undefined" class="btn btn-ghost gap-2" target="_blank"
+                        href="{{product.link_mytek}}">Link <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg></a>
+                    </th>
+                  </tr>
 
-                <label for="color_cb" class="cursor-pointer p-0.5">
-                  <input type="radio" name="color" id="color_cb" class="sr-only peer" />
+                </tbody>
 
-                  <span
-                    class="inline-block px-3 py-1 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                    Cobalt Blue
-                  </span>
-                </label>
-              </div>
+              </table>
             </div>
           </fieldset>
 
 
           <div class="flex mt-8">
-
-
-            <button type="submit"
-              class="block px-5 py-3 ml-3 text-xs font-medium text-white bg-green-600 rounded hover:bg-green-500">
-              Save
-            </button>
+            <button (click)="this.cartService.AddProductToCart(product._id, product.name, category)"
+              [disabled]="this.cartService.userHasLiked(product._id)" class="btn btn-primary"> Save</button>
           </div>
         </form>
       </div>
+    </div>
+  </div>
+  <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+    <div class="collapse-title text-xl font-medium">
+      Reviews
+    </div>
+    <div class="collapse-content">
+      <p>tabindex="0" attribute is necessary to make the div focusable</p>
     </div>
   </div>
 </section>

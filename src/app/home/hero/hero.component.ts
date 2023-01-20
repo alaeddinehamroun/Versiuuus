@@ -3,6 +3,7 @@ import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home-hero',
@@ -13,7 +14,7 @@ export class HeroComponent implements OnInit {
   searchQuery!: string;
   suggestions!: Product[];
   products: Product[] = [];
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
   ngOnInit() {
 
   }
@@ -28,12 +29,15 @@ export class HeroComponent implements OnInit {
   search() {
     this.productService.searchProduct(this.searchQuery).subscribe({
       next: response => {
-        console.log(response)
         this.suggestions = response
         this.products.forEach(p => {
           this.suggestions=this.suggestions.filter(sugg => sugg["_id"] !== p._id)
-
         });
+        if (this.products.length > 0){
+          console.log(this.products.length)
+          console.log(this.products[0].category)
+          this.suggestions = this.suggestions.filter(s => s["category"] == this.products[0].category)
+        }
 
       },
       error: err =>
@@ -46,5 +50,8 @@ export class HeroComponent implements OnInit {
   }
   removeProduct(id: string) {
     this.products = this.products.filter(product => product["_id"] !== id)
+  }
+  compare() {
+    this.router.navigate(['comparison'], {queryParams: { product_ids: JSON.stringify(this.products)}})
   }
 }

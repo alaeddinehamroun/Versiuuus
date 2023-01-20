@@ -7,9 +7,9 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CartModule } from './cart/cart.module';
 import { HomeModule } from './home/home.module';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ProductModule } from './product/product.module';
-import { AuthInterceptor } from './services/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({

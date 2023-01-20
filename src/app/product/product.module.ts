@@ -8,6 +8,8 @@ import { ProductRoutingModule } from './product-routing.module';
 import { TruncatePipe } from '../pipes/truncate.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CompareCardComponent } from './compare-card/compare-card.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,9 +19,12 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ComparisonResultComponent,
     CardComponent,
     ProductDetailsComponent,
-    
+    CompareCardComponent,
+
   ],
   imports: [
+    FormsModule,
+
     SharedModule,
     CommonModule,
     ProductRoutingModule,
